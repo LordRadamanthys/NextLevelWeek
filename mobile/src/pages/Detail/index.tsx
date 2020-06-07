@@ -14,6 +14,7 @@ interface ParamsRouteInterface {
 interface DataInterface {
     point: {
         image: string,
+        image_url: string,
         name: string,
         email: string,
         whatsapp: string,
@@ -63,7 +64,7 @@ const Detail = () => {
                     <Icon name="arrow-left" size={20} color="#34cb79" />
                 </TouchableOpacity>
 
-                <Image style={styles.pointImage} source={{ uri: "https://c8.alamy.com/comp/PECYA9/dongmun-market-jeju-island-south-korea-strait-asia-PECYA9.jpg" }} />
+                <Image style={styles.pointImage} source={{ uri: data.point.image_url }} />
                 <Text style={styles.pointName}>{data.point.name}</Text>
                 <Text style={styles.pointItems}>{data.items.map(item => item.title).join(', ')}</Text>
 

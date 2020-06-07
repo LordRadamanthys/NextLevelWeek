@@ -20,6 +20,7 @@ interface PointsInterface {
     id: number,
     name: string,
     image: string,
+    image_url: string,
     latitude: number,
     longitude: number,
 }
@@ -119,7 +120,7 @@ const Points = () => {
                                         longitude: point.longitude,
                                     }} >
                                     <View style={styles.mapMarkerContainer}>
-                                        <Image style={styles.mapMarkerImage} source={{ uri: "https://s2.glbimg.com/vmo9jpOdJ51CkO8NMtjPK5RNIHg=/512x320/smart/e.glbimg.com/og/ed/f/original/2018/10/11/como-gastar-menos-no-mercado.jpg" }} />
+                                        <Image style={styles.mapMarkerImage} source={{ uri: point.image_url }} />
                                         <Text style={styles.mapMarkerTitle}>{point.name}</Text>
                                     </View>
                                 </Marker>
