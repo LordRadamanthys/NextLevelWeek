@@ -39,12 +39,14 @@ const Points = () => {
     const route = useRoute()
 
     const routeParams = route.params as ParamsInterface
-
     
 
     useEffect(() => {
         api.get('items').then(response => {
+            console.log(response)
             setItems(response.data)
+        }).catch(err=>{
+            console.log(err)
         })
     }, [])
     useEffect(() => {

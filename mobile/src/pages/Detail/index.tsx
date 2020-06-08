@@ -12,7 +12,7 @@ interface ParamsRouteInterface {
 }
 
 interface DataInterface {
-    point: {
+    serializedPoints: {
         image: string,
         image_url: string,
         name: string,
@@ -35,6 +35,7 @@ const Detail = () => {
 
     useEffect(() => {
         api.get(`points/${route_params.point_id}`).then(response => {
+            console.log(response.data)
             setData(response.data)
         })
     }, [])
@@ -45,16 +46,16 @@ const Detail = () => {
     function handleComposerMail(){
         MailComposer.composeAsync({
             subject:'Interesse na coleta de residuos',
-            recipients:[data.point.email],
+            recipients:[data.serializedPoints.email],
 
         })
     }
 
     function handleComposerWhatsapp(){
-       Linking.openURL(`whatsapp://send?phone=${data.point.whatsapp}&text=Tenho interesse sobre ccoleta de residuos`)
+       Linking.openURL(`whatsapp://send?phone=${data.serializedPoints.whatsapp}&text=Tenho interesse sobre ccoleta de residuos`)
     }
 
-    if (!data.point) {
+    if (!data.serializedPoints) {
         return null
     }
     return (
@@ -64,13 +65,13 @@ const Detail = () => {
                     <Icon name="arrow-left" size={20} color="#34cb79" />
                 </TouchableOpacity>
 
-                <Image style={styles.pointImage} source={{ uri: data.point.image_url }} />
-                <Text style={styles.pointName}>{data.point.name}</Text>
+                <Image style={styles.pointImage} source={{ uri: data.serializedPoints.image_url }} />
+                <Text style={styles.pointName}>{data.serializedPoints.name}</Text>
                 <Text style={styles.pointItems}>{data.items.map(item => item.title).join(', ')}</Text>
 
                 <View>
                     <Text style={styles.addressTitle}>Endereço</Text>
-                    <Text style={styles.addressContent}>{`${data.point.city}, ${data.point.uf}`}</Text>
+                    <Text style={styles.addressContent}>{`${data.serializedPoints.city}, ${data.serializedPoints.uf}`}</Text>
                 </View>
 
             </View>
